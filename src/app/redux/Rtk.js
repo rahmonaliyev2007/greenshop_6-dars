@@ -13,10 +13,10 @@ export const postApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getBanners: builder.query({
-      query: () => "banners",
+    getData: builder.query({
+      query: (api) => api,
     }),
   }),
 });
 
-export const { useGetBannersQuery } = postApi;
+export const { useGetDataQuery } = postApi;

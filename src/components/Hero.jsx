@@ -1,13 +1,13 @@
 
 "use client";
 
-import { useGetBannersQuery } from "../app/redux/Rtk"; 
+import { useGetDataQuery } from "../app/redux/Rtk"; 
 import { useState, useRef } from "react";
 import { Carousel } from "antd";
 import Image from "next/image";
 
 const HeroCarousel = () => {
-    const { data: slides = [], isLoading, isError } = useGetBannersQuery(); 
+    const { data: slides = [], isLoading, isError } = useGetDataQuery("banners"); 
     const [currentSlide, setCurrentSlide] = useState(0);
     const carouselRef = useRef(null);
 
@@ -22,7 +22,7 @@ const HeroCarousel = () => {
     }
 
     return (
-        <div className="relative max-w-[1240px] m-auto px-4 mt-4">
+        <div className="relative max-w-[1240px] m-auto px-4 mt-4 ">
             <Carousel ref={carouselRef} autoplay autoplaySpeed={4000} dots={false} beforeChange={(from, to) => setCurrentSlide(to)}>
                 {slides.map((slide, index) => (
                     <div key={index} className="flex items-center justify-center bg-[#F5F5F5] rounded-xl h-[400px] pl-10">
@@ -35,14 +35,14 @@ const HeroCarousel = () => {
                                         {slide.title.split(" ").slice(-1)}
                                     </span>
                                 </h2>
-                                <p className="mt-4 font-bold leading-5 text-[#727272] max-w-[60%]">{slide.description}</p>
-                                <button className="mt-6 px-6 py-3 max-w-40 cursor-pointer text-base font-semibold uppercase bg-[#46A358] hover:bg-[#46A358]/70 text-white rounded-md transition">
+                                <p className="mt-6 font-bold leading-5 text-[#727272] max-w-[60%]">{slide.description}</p>
+                                <button className="transi mt-6 px-6 py-2 max-w-40 cursor-pointer text-base font-semibold uppercase bg-[#46A358] hover:bg-[#46A358]/70 text-white rounded-md transition">
                                     {slide.btn}
                                 </button>
                             </div>
 
                             <div className="flex justify-end items-end">
-                                <Image src={slide.img} alt={slide.subtitle || "Carousel img"} width={390} height={390} />
+                                <Image  src={slide.img} alt={slide.subtitle || "Carousel img"} className="max-w-[390px] max-h-[390px]" width={390} height={390} priority />
                             </div>
                         </div>
                     </div>
