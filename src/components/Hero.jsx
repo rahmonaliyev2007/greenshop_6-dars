@@ -1,6 +1,4 @@
-
-"use client";
-
+"use client"
 import { useGetDataQuery } from "../app/redux/Rtk"; 
 import { useState, useRef } from "react";
 import { Carousel } from "antd";

@@ -1,5 +1,5 @@
+ 
 "use client"
-
 import { Mail, MailIcon, MapPin, PhoneCall } from "lucide-react"
 
 export default function Footer() {

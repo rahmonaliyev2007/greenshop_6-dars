@@ -1,4 +1,4 @@
-"use client";
+ "use client";
 import { usePathname } from "next/navigation";
 import { LogOut, Search, ShoppingCart } from "lucide-react";
 import Link from "next/link";

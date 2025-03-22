@@ -1,4 +1,4 @@
-"use client"
+"use client" 
 
 import { useGetDataQuery } from "@/app/redux/Rtk";
 import { useState } from "react";
