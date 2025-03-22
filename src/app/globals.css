@@ -33,6 +33,14 @@ body {
     bottom: 7px;
   }
 
+  &:hover img{
+    scale: 1.1;
+  }
+  img{
+    scale: 1;
+    transition: all 0.3s ease !important;
+  }
+
   .card_details {
     display: flex;
     gap: 3px;

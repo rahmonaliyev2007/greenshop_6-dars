@@ -7,7 +7,7 @@ export default function ProductCard({product :{name, id, img1, price, isSale, sa
   return (
     <div className="max-w-[300px] w-full border-t-2 border-t-transparent hover:border-t-[#46A358] transi">
         <div className="card_img transi overflow-hidden ">
-            <div className="bg-[#FBFBFB] transi hover:scale-110"> 
+            <div className="bg-[#FBFBFB] transi"> 
                 <Image width={250} height={250} priority src={img1} alt={name} className="w-full h-auto mix-blend-multiply" />
             </div>
             <div className="card_details">
