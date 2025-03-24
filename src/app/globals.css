@@ -24,32 +24,3 @@ body {
     background-position: 200% 0;
   }
 }
-.card_img {
-  position: relative;
-
-  &:hover .card_details {
-    opacity: 1;
-    gap: 10px;
-    bottom: 7px;
-  }
-
-  &:hover img{
-    scale: 1.1;
-  }
-  img{
-    scale: 1;
-    transition: all 0.3s ease !important;
-  }
-
-  .card_details {
-    display: flex;
-    gap: 3px;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: 0px;
-    width: 100%;
-    opacity: 0;
-    transition: all 0.3s ease !important;
-  }
-}

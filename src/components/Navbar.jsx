@@ -1,10 +1,14 @@
- "use client";
+"use client";
+
 import { usePathname } from "next/navigation";
-import { LogOut, Search, ShoppingCart } from "lucide-react";
+import { LogOut, Search, ShoppingCart, Heart } from "lucide-react";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
     const pathname = usePathname();
+    const cartCount = useSelector((state) => state.cart.cart.length);
+    const likedCount = useSelector((state) => state.liked.liked.length);
 
     const navLinks = [
         { name: "Home", path: "/" },
@@ -14,7 +18,7 @@ export default function Navbar() {
     ];
 
     return (
-        <nav className="top-0 sticky w-full z-50 bg-white ">
+        <nav className="top-0 sticky w-full z-50 bg-white">
             <div className="flex justify-between items-center max-w-[1240px] mx-auto px-4 py-5">
                 <Link href="/">
                     <img src="/images/logo.svg" alt="logo" width={150} height={35} />
@@ -30,12 +34,26 @@ export default function Navbar() {
                 </ul>
                 <div className="flex items-center gap-6">
                     <button className="cursor-pointer"><Search size={24} /></button>
-                    <button className="relative cursor-pointer"><ShoppingCart size={24} /> <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">0</span> </button>
+                    <button className="relative cursor-pointer">
+                        <ShoppingCart size={24} />
+                        {cartCount > 0 && (
+                            <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
+                                {cartCount}
+                            </span>
+                        )}
+                    </button>
+                    <button className="relative cursor-pointer">
+                        <Heart size={24} />
+                        {likedCount > 0 && (
+                            <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
+                                {likedCount}
+                            </span>
+                        )}
+                    </button>
                     <button className="bg-[#46A358] transi cursor-pointer hover:bg-[#46A358]/70 text-white px-4 py-2 rounded-md flex items-center gap-2">
                         <LogOut size={16} /> Login
                     </button>
                 </div>
-
             </div>
             <div className="max-w-[1240px] m-auto  h-[2px] px-4 ">
                 <hr className="bg-[#46a3597f] border-none w-full h-[2px]"></hr>
