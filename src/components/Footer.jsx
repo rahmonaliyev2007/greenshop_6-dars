@@ -44,7 +44,7 @@ export default function Footer() {
                     <div className="max-w-[400px] w-full flex gap-2 items-center text-sm text-[#3D3D3D]"><PhoneCall size={20} className="text-[#46A358]"/> +88 01911 717 490</div>
                 </div>
                 <div>
-                    footer bottom
+                    footer tegi
                 </div>
             </div>
 
