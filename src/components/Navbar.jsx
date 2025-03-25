@@ -4,11 +4,12 @@ import { usePathname } from "next/navigation";
 import { LogOut, Search, ShoppingCart, Heart } from "lucide-react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import Image from "next/image";
 
 export default function Navbar() {
     const pathname = usePathname();
-    const cartCount = useSelector((state) => state.cart.cart.length);
-    const likedCount = useSelector((state) => state.liked.liked.length);
+    const cartItems = useSelector((state) => state.cart.cart.length);
+    const likedItems = useSelector((state) => state.liked.liked.length);
 
     const navLinks = [
         { name: "Home", path: "/" },
@@ -21,12 +22,12 @@ export default function Navbar() {
         <nav className="top-0 sticky w-full z-50 bg-white">
             <div className="flex justify-between items-center max-w-[1240px] mx-auto px-4 py-5">
                 <Link href="/">
-                    <img src="/images/logo.svg" alt="logo" width={150} height={35} />
+                    <Image src="/images/logo.svg" alt="logo" width={150} height={35} priority />
                 </Link>
                 <ul className="flex gap-8 font-medium text-gray-700">
                     {navLinks.map((link) => (
                         <li key={link.path}>
-                            <Link href={link.path} className={`py-[29px] transi ${pathname === link.path ? "border-b-2 border-[#46A358] text-[#46A358]" : "hover:text-[#46A358]"}`}>
+                            <Link href={link.path} className={`py-[29px] transi border-b-2 ${pathname === link.path ? " border-[#46A358] text-[#46A358]" : "border-transparent hover:text-[#46A358]"}`}>
                                 {link.name}
                             </Link>
                         </li>
@@ -36,17 +37,17 @@ export default function Navbar() {
                     <button className="cursor-pointer"><Search size={24} /></button>
                     <button className="relative cursor-pointer">
                         <ShoppingCart size={24} />
-                        {cartCount > 0 && (
+                        {cartItems > 0 && (
                             <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
-                                {cartCount}
+                                {cartItems}
                             </span>
                         )}
                     </button>
                     <button className="relative cursor-pointer">
                         <Heart size={24} />
-                        {likedCount > 0 && (
+                        {likedItems > 0 && (
                             <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
-                                {likedCount}
+                                {likedItems}
                             </span>
                         )}
                     </button>
@@ -55,7 +56,7 @@ export default function Navbar() {
                     </button>
                 </div>
             </div>
-            <div className="max-w-[1240px] m-auto  h-[2px] px-4 ">
+            <div className="max-w-[1240px] m-auto h-[2px] px-4">
                 <hr className="bg-[#46a3597f] border-none w-full h-[2px]"></hr>
             </div>
         </nav>
