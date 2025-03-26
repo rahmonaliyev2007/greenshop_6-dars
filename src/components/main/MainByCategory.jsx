@@ -3,7 +3,7 @@
 import { useGetProductsByCategoryQuery } from "@/app/redux/Rtk";
 import ProductCard from "../ProductCard";
 import { useState, useRef, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, SlidersHorizontal } from "lucide-react";
 
 export default function ({ selectedCategory, filteredPrice }) {
     const [sort, setSortOrder] = useState("default-sorting");
@@ -28,16 +28,16 @@ export default function ({ selectedCategory, filteredPrice }) {
     console.log(paginatedProducts?.data);
 
     return (
-        <div className="w-[74%] pl-5 pt-0">
+        <div className="w-[74%] lg:pl-5 pt-0 max-lg:w-full">
             <div ref={topRef} className="flex justify-between items-center mb-10">
-                <ul className="flex justify-start items-center gap-5 font-semibold">
+                <ul className="flex justify-start  items-center gap-5 font-semibold">
                     {[{ label: "All Plants", value: "all-plants" }, { label: "New Arrivals", value: "new-arrivals" }, { label: "Sale", value: "sale" }].map(({ label, value }) => (
-                        <li key={value} className={`cursor-pointer ${selectedFilter === value ? "text-[#46A358] border-b border-b-[#46A358]" : ""}`} onClick={() => setSelectedFilter(value)}>
+                        <li key={value} className={`cursor-pointer ${selectedFilter === value ? "text-[#46A358] border-b border-b-[#46A358]" : "hover:text-[#46A358]"}`} onClick={() => setSelectedFilter(value)}>
                             {label}
                         </li>
                     ))}
                 </ul>
-                <div className="flex justify-end gap-3 items-center font-semibold">
+                <div className="flex max-md:hidden justify-end gap-3 items-center font-semibold">
                     <p>Sorting: <select name="sort" className="outline-none font-normal" id="sort" onChange={(e) => setSortOrder(e.target.value)}>
                         <option value="default-sorting">Default Sorting</option>
                         <option value="cheapthe-cheapest">The Cheapest</option>
@@ -45,10 +45,11 @@ export default function ({ selectedCategory, filteredPrice }) {
                     </select>
                     </p>
                 </div>
+                <button className="md:hidden"><SlidersHorizontal /></button>
             </div>
 
             {isLoading || isFetching ? (
-                <div className="grid grid-cols-3 justify-items-center gap-5">
+                <div className="grid grid-cols-2 lg:grid-cols-3 justify-items-center gap-5">
                     {Array.from({ length: 9 }).map((_, i) => (
                         <div key={i} className="max-w-[300px] w-full border-t-2 border-t-transparent hover:border-t-[#46A358] transi group rounded">
                             <div className="card_img relative transi rounded overflow-hidden">
@@ -63,12 +64,12 @@ export default function ({ selectedCategory, filteredPrice }) {
                         </div>
                     ))}
                 </div>) : paginatedProducts?.length > 0 ? (<>
-                    <div className="grid grid-cols-3 justify-items-center gap-5">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 justify-items-center gap-5">
                         {paginatedProducts.map(product => (
                             <ProductCard key={product?.id} product={product} />
                         ))}
                     </div>
-                    <div className="flex justify-end items-center gap-2 mt-5">
+                    <div className="flex justify-center sm:justify-end items-center gap-2 mt-5">
                         <button className="p-2 bg-gray-200 rounded disabled:opacity-40" disabled={currentPage === 1} onClick={() => handlePageChange(Math.max(currentPage - 1, 1))}> <ChevronLeft /> </button>
                         {Array.from({ length: totalPages }, (_, i) => (
                             <button key={i} onClick={() => handlePageChange(i + 1)} className={`px-4 py-2 rounded ${currentPage === i + 1 ? "bg-[#46A358] text-white" : "bg-gray-200"}`}>{i + 1}</button>

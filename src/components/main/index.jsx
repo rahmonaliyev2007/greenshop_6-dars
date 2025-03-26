@@ -19,7 +19,7 @@ export default function Main() {
 
     return (
         <div className="max-w-[1240px] px-4 m-auto flex justify-between items-start gap-6 mt-10">
-            <div className="w-[24%] bg-[#FBFBFB] pt-4 rounded-xl overflow-hidden">
+            <div className="w-[24%]  max-lg:hidden bg-[#FBFBFB] pt-4 rounded-xl overflow-hidden">
                 <div className="px-3">
                     <h3 className="font-bold text-lg">Categories</h3>
                     {isLoading || isFetching ? (
