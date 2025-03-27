@@ -1,16 +1,23 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { LogOut, Search, ShoppingCart, Heart } from "lucide-react";
+import { LogOut, Search, ShoppingCart, Heart, User } from "lucide-react";
 import Link from "next/link";
-import { useSelector } from "react-redux";
 import Image from "next/image";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import { useRouter } from "next/navigation";
+import useAuthStore from "@/store/authStore";
+import { useState } from "react";
 
 export default function Navbar() {
     const pathname = usePathname();
-    const cartItems = useSelector((state) => state.cart.cart.length);
-    const likedItems = useSelector((state) => state.liked.liked.length);
-
+    const router = useRouter();
+    const { isLogged, logout } = useAuthStore();
+    const { user } = useAuthStore();
+    const [isLoginOpen , setIsLoginOpen] = useState(false);
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
     const navLinks = [
         { name: "Home", path: "/" },
         { name: "Shop", path: "/shop" },
@@ -35,25 +42,32 @@ export default function Navbar() {
                 </ul>
                 <div className="flex items-center gap-6">
                     <button className="cursor-pointer"><Search size={24} /></button>
-                    <button className="relative cursor-pointer">
-                        <ShoppingCart size={24} />
-                        {cartItems > 0 && (
-                            <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
-                                {cartItems}
-                            </span>
-                        )}
-                    </button>
-                    <button className="relative cursor-pointer">
-                        <Heart size={24} />
-                        {likedItems > 0 && (
-                            <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
-                                {likedItems}
-                            </span>
-                        )}
-                    </button>
-                    <button className="bg-[#46A358] transi cursor-pointer hover:bg-[#46A358]/70 text-white px-4 py-2 rounded-md flex items-center gap-2">
-                        <LogOut size={16} /> Login
-                    </button>
+                    <button className="relative cursor-pointer"><ShoppingCart size={24} /></button>
+                    <button className="relative cursor-pointer"><Heart size={24} /></button>
+
+                    {isLogged ? (
+                        <div className="flex items-center gap-3">
+                            <button onClick={() => router.push("/profile")} className="bg-[#46A358] hover:bg-[#46A358]/70 px-4 py-2 rounded-md text-white flex items-center gap-2 transition-all">
+                                <User size={16} /> {user?.name || "User"}
+                            </button>
+                            
+                        </div>
+                    ) : (
+                        <Dialog>
+                            <DialogTrigger onClick={() => { setIsLoginOpen(true); setIsRegisterOpen(false); }} className="bg-[#46A358] hover:bg-[#46A358]/70 px-4 py-2 rounded-md text-white flex items-center gap-2 transition-all">
+                                <LogOut size={16} /> Login
+                            </DialogTrigger>
+                            <DialogContent className="max-w-md">
+                                <div className="w-full my-4 flex justify-center items-center gap-3 text-xl font-semibold">
+                                    <button onClick={() => { setIsLoginOpen(true); setIsRegisterOpen(false); }} className={`${isLoginOpen ? "text-[#46A358]" : ""}`}>Login</button>
+                                    <div className="border-r-2 border-gray-300 h-4"></div>
+                                    <button onClick={() => { setIsLoginOpen(false); setIsRegisterOpen(true); }} className={`${!isLoginOpen ? "text-[#46A358]" : ""}`}>Register</button>
+                                </div>
+                                {isLoginOpen && <Login />}
+                                {isRegisterOpen && <Register />}
+                            </DialogContent>
+                        </Dialog>
+                    )}
                 </div>
             </div>
             <div className="max-w-[1240px] m-auto h-[2px] px-4">

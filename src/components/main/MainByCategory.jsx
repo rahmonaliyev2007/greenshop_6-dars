@@ -25,7 +25,6 @@ export default function ({ selectedCategory, filteredPrice }) {
 
     const totalPages = Math.ceil((products?.data?.length || 0) / onePage);
     const paginatedProducts = products?.data?.slice((currentPage - 1) * onePage, currentPage * onePage);
-    console.log(paginatedProducts?.data);
 
     return (
         <div className="w-[74%] lg:pl-5 pt-0 max-lg:w-full">

@@ -1,15 +1,13 @@
 "use client";
 
 import { useGetDataQuery } from "@/app/redux/Rtk";
-import { useState, useMemo } from "react";
+import { useState} from "react";
 import { Slider } from "antd";
 import MainByCategory from "./MainByCategory";
 
 export default function Main() {
     const [selectedCategory, setSelectedCategory] = useState("house-plants");
     const { data: categories = [], isLoading, isFetching, isError } = useGetDataQuery("flower/category");
-    console.log(selectedCategory);
-    console.log(categories);
     const [price, setPrice] = useState([0, 1000]);
     const [filteredPrice, setFilteredPrice] = useState([0, 1000]);
 
