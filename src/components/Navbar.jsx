@@ -53,7 +53,7 @@ export default function Navbar() {
                             </span>
                         )}
                     </button>
-                    <button className="relative cursor-pointer">
+                    <button onClick={()=>{router.push('profile/wishlist')}} className="relative cursor-pointer">
                         <Heart size={24} />
                         {likedItems > 0 && (
                             <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
