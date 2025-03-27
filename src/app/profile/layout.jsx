@@ -8,15 +8,7 @@ import { useEffect } from "react";
 
 export default function ProfileLayout({ children }) {
   const pathname = usePathname();
-  const { isLogged, logout } = useAuthStore();
-  const router = useRouter();
   
-  useEffect(() => {
-    if (!isLogged) {
-      router.push("/");
-    }
-  }, []);
-
   return (
     <div className="max-w-[1240px] mt-20 m-auto px-4 flex justify-between ">
       <div className="w-[21%] rounded p-4 bg-[#FBFBFB]">
