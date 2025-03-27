@@ -10,14 +10,17 @@ import Register from "./auth/Register";
 import { useRouter } from "next/navigation";
 import useAuthStore from "@/store/authStore";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Navbar() {
     const pathname = usePathname();
     const router = useRouter();
     const { isLogged, logout } = useAuthStore();
     const { user } = useAuthStore();
-    const [isLoginOpen , setIsLoginOpen] = useState(false);
+    const [isLoginOpen, setIsLoginOpen] = useState(false);
     const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+    const cartItems = useSelector((state) => state.cart.cart.length);
+    const likedItems = useSelector((state) => state.liked.liked.length);
     const navLinks = [
         { name: "Home", path: "/" },
         { name: "Shop", path: "/shop" },
@@ -42,15 +45,29 @@ export default function Navbar() {
                 </ul>
                 <div className="flex items-center gap-6">
                     <button className="cursor-pointer"><Search size={24} /></button>
-                    <button className="relative cursor-pointer"><ShoppingCart size={24} /></button>
-                    <button className="relative cursor-pointer"><Heart size={24} /></button>
+                    <button className="relative cursor-pointer">
+                        <ShoppingCart size={24} />
+                        {cartItems > 0 && (
+                            <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
+                                {cartItems}
+                            </span>
+                        )}
+                    </button>
+                    <button className="relative cursor-pointer">
+                        <Heart size={24} />
+                        {likedItems > 0 && (
+                            <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
+                                {likedItems}
+                            </span>
+                        )}
+                    </button>
 
                     {isLogged ? (
                         <div className="flex items-center gap-3">
-                            <button onClick={() => router.push("/profile")} className="bg-[#46A358] hover:bg-[#46A358]/70 px-4 py-2 rounded-md text-white flex items-center gap-2 transition-all">
+                            <button onClick={() => router.push("/profile/account")} className="bg-[#46A358] hover:bg-[#46A358]/70 px-4 py-2 rounded-md text-white flex items-center gap-2 transition-all">
                                 <User size={16} /> {user?.name || "User"}
                             </button>
-                            
+
                         </div>
                     ) : (
                         <Dialog>
