@@ -35,7 +35,7 @@ function Register() {
       const response = await addPost(user).unwrap();
       const { setUser, setToken } = useAuthStore.getState();
       toast.success("Registration has been complated succesfullt 🎉");
-      setUser(response?.data?.user);
+      setUser(response?.data?.user, response?.data?.token);
       setToken(response?.data?.token);
       setUser({ name: '', surname: '', email: '', password: '' });
       setConfirmPassword('');

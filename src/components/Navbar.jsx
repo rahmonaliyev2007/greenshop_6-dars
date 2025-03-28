@@ -53,15 +53,7 @@ export default function Navbar() {
                             </span>
                         )}
                     </button>
-                    <button onClick={()=>{router.push('profile/wishlist')}} className="relative cursor-pointer">
-                        <Heart size={24} />
-                        {likedItems > 0 && (
-                            <span className="absolute -top-3 -right-3 text-xs font-extrabold grid place-items-center text-white rounded-full border-3 border-white bg-[#46A358] w-[25px] h-[25px]">
-                                {likedItems}
-                            </span>
-                        )}
-                    </button>
-
+                   
                     {isLogged ? (
                         <div className="flex items-center gap-3">
                             <button onClick={() => router.push("/profile/account")} className="bg-[#46A358] hover:bg-[#46A358]/70 px-4 py-2 rounded-md text-white flex items-center gap-2 transition-all">

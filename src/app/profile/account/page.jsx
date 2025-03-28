@@ -6,30 +6,40 @@ export default function Account() {
 
   const { user } = useAuthStore();
 
-
   return (
     <div>
         <form>
-            <label>
-                <span>Fist Name</span>
-                <input type="text" value={user.name}/>
+            <div className='flex gap-3 justify-between items-center'>
+            <label className='w-full my-3' >
+                <div> <span className='text-red-500'>*</span> Fist Name</div>
+                <input className='w-full my-2 py-2 px-3 rounded-lg border bg-white' type="text" value={user.name}/>
             </label>
-            <label>
-                <span>Last Name</span>
-                <input type="text" value={user.surname}/>
+            <label className='w-full my-3' >
+                <div> <span className='text-red-500'>*</span> Last Name</div>
+                <input className='w-full my-2 py-2 px-3 rounded-lg border bg-white' type="text" value={user.surname}/>
             </label>
-            <label>
-                <span>Email Address</span>
-                <input type="email" value={user.email}/>
+            </div>
+            <div className='flex gap-3 justify-between items-center'>
+            <label className='w-full my-3' >
+                <div> <span className='text-red-500'>*</span> Email Address</div>
+                <input className='w-full my-2 py-2 px-3 rounded-lg border bg-white' type="email" value={user.email}/>
             </label>
-            <label>
-                <span>Phone Number</span>
-                <input type="text" value={user.phone_number}/>
+            <label className='w-full my-3' >
+                <div> <span className='text-red-500'>*</span> Phone Number</div>
+                <input className='w-full my-2 py-2 px-3 rounded-lg border bg-white' type="text" value={user.phone_number}/>
             </label>
-            <label>
-                <span>Username</span>
-                <input type="text" value={user.username}/>
+            </div>
+            <div className='flex gap-3 justify-between items-center'>
+            <label className='w-full my-3' >
+                <div> <span className='text-red-500'>*</span> Username</div>
+                <input className='w-full my-2 py-2 px-3 rounded-lg border bg-white' type="text" value={user.username}/>
             </label>
+            <label className='w-full my-3' >
+                <div> <span className='text-red-500'></span> Photo</div>
+                <input className='w-1/2  my-2block py-2 px-3 rounded-lg border bg-white' type="file" value={user.username}/>
+            </label>
+            </div>
+            <button className='bg-[#46A358] text-white py-2 px-3 cursor-pointer rounded font-semibold'>Save Changes</button>
         </form>
     </div>
   )

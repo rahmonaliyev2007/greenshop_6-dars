@@ -32,7 +32,7 @@ function Login() {
     try {
       const response = await signIn(user).unwrap();
       toast.success("Login has been Successfully 🎉");
-      setAuthUser(response?.data?.user);
+      setAuthUser(response?.data?.user, response?.data?.token);
       setToken(response?.data?.token);
       setUser({ email: '', password: '' });
       setErrors({});
